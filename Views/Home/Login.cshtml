@@ -1,0 +1,36 @@
+@model Login
+<style>
+    * {
+        vertical-align: top;
+        font-family: sans-serif;
+    }
+    #page-wrap {
+        width: 1000px;
+        margin: 0 auto;
+    }
+    #login {
+        width: 400px;
+        padding: 20px;
+        display: inline-block;
+    }
+</style>
+<p ALIGN=RIGHT><a href="/">
+   <button>Register</button> </p>
+</a>
+
+<div id="login">
+            <h1>Login</h1>
+            <form asp-action="LoginProccess" asp-controller="Home" method='post'>
+            <div class="form-group">
+                <label asp-for="Email">Email address</label>
+                <input asp-for="Email" class="form-control" aria-describedby="emailHelp"
+                    placeholder="Enter email">
+                    <span asp-validation-for="Email"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password">Password</label>
+                <input asp-for="Password" class="form-control" placeholder="Password">
+            </div>
+            <button type="submit" class="btn btn-primary">Login</button>
+            </form>
+        </div>

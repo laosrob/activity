@@ -1,0 +1,51 @@
+@model Activityclass
+<style>
+    * {
+        vertical-align: top;
+        font-family: sans-serif;
+    }
+    #page-size {
+        width: 500px;
+        margin: 0 auto;
+    }
+</style>
+<h1>Create an Acitivity</h1>
+<p ALIGN=RIGHT><a href="/dashboard">
+   <button>Dashboard</button> </a>
+   <a href="/logout">
+   <button>Logout</button> </p> </a>
+ <div id="page-size">
+               <form asp-action="Add_Activity" asp-controller="Home" method='post'>
+                <div class="form-group">
+                    <label asp-for="Act">Acitivity</label>
+                    <input asp-for="Act" class="form-control" >
+                    <span asp-validation-for="Act"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Date">Date</label>
+                    <input type ="date" asp-for="Date">
+                    <span asp-validation-for="Date"></span>
+                </div>
+            <div class="form-group">
+             <span asp-validation-for="Time"></span>
+        <label asp-for="Time"></label>
+        <input placeholder="5:30 AM" asp-for="Time">
+                </div> <br>
+                            <div class="form-group">
+        <label asp-for="Duration"></label>
+        <input type="number" asp-for="Duration">
+        <select name="dur">
+            <option value="minutes">Minutes</option>
+            <option value="hours">Hours</option>
+            <option value="days">Days</option>
+            <span asp-validation-for="Duration"></span>
+        </select>
+                </div> <br>
+                <div class="form-group">
+                    <label asp-for="Description">Description</label>
+                    <input asp-for="Description" class="form-control">
+                    <span asp-validation-for="Description"></span>
+                </div> <br>
+                <button type="submit" class="btn btn-primary">Create</button> <br>
+            </form>
+ </div>

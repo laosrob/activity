@@ -1,0 +1,48 @@
+<p ALIGN=RIGHT><a href="/dashboard">
+   <button>Dashboard</button> </a>
+  <a href="../logout">
+   <button>Logout</button> </p> </a>
+
+<h1>@ViewBag.Activity.Act</h1>
+
+   Event Coordinator:  @ViewBag.theUser.FirstName <br><br>
+
+   <h2>Description:</h2> @ViewBag.Activity.Description</h2>
+
+   <h2>Partcipants:</h2>
+
+   @foreach (var x in @ViewBag.People.ActRSVP)   
+{
+    <li>
+        @x.RSVPUser.FirstName @x.RSVPUser.LastName
+    </li>
+} 
+</ul>
+@{
+    bool temp = false;
+    foreach(var something in @ViewBag.People.ActRSVP)
+        {   
+            if ( @ViewBag.User == @something.RSVPUser.UserId)
+            {
+             temp = true;
+            }
+        }
+        if (temp ==false)
+        {
+            <form action="/RSVP/@ViewBag.Activity.ActivityId" method='post'>
+                        <button type="submit" class="btn btn-primary">Join</button>
+                    </form>
+        }
+        else
+        {
+            <form action="/unRSVP/@ViewBag.Activity.ActivityId" method='post'>
+                            <button type="submit" class="btn btn-primary">Leave</button>
+                        </form>
+        }
+}
+
+
+             
+        
+     
+

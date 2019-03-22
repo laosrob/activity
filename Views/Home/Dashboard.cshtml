@@ -1,0 +1,86 @@
+<h1>Dojo Activity Center</h1> 
+<p ALIGN=RIGHT>Welcome @ViewBag.Name!<a href="../logout">
+        <button>Logout</button> </p> </a>
+
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Activity</th>
+            <th scope="col">Date and Time</th>
+            <th scope="col">Duration</th>
+            <th scope="col">Event Coordinator</th>
+            <th scope="col">Number of Participants</th>
+            <th scope="col">Actions</th>
+        </tr>
+        </thead>
+    <tbody>
+
+        @foreach(var something in @ViewBag.Activity)
+        {
+            DateTime CurrentTime = DateTime.Now;
+            if(@something.Date > CurrentTime)
+            {
+<tr>
+      <td>@something.Act <a href="../activity/@something.ActivityId"><button>View
+                        Activity</button></a> </td>
+      <td>@something.Date.ToShortDateString() @something.Time</td>
+      @if(something.Duration <= 60)
+            {
+                <td>@something.Duration Minutes</td>
+            }
+            else if(something.Duration <= 1440)
+            {
+                int duration = something.Duration/60;
+                <td>@duration Hours</td>
+            }
+            else
+            {
+                int duration = something.Duration/1440;
+                <td>@duration Days</td>
+            }
+
+    <td>@something.Coordinator</td>
+    
+      <td>@something.ActRSVP.Count</td>
+            @if (@ViewBag.User == @something.UserId)
+            {
+            <td> <a href="../delete/@something.ActivityId"><button>Delete</button></a> </td>
+            }
+            else
+            {
+                bool temp = false;
+                @foreach(var a in @something.ActRSVP)
+                {
+                    if (a.UserId == @ViewBag.User)
+                    {
+                    temp = true;
+                    }
+                }
+
+                if (temp == false)
+                {
+                <td>
+                    <a href="/RSVP/@something.ActivityId/@ViewBag.User"><button>Join</button></a>
+                @ViewBag.samedayrs
+
+                </td>
+                }
+                else
+                {
+                    <td>
+                        <a href="/unRSVP/@something.ActivityId/@ViewBag.User"><button>Leave
+                        </button></a>
+                    </td>
+                }
+            }
+    </tr>
+    }
+        }
+  </tbody>
+</table>
+
+
+        <p ALIGN=RIGHT><a href="/new">
+        <button>Add New Activity</button> </p> </a>
+
+
